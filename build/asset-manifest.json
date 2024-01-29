@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/static/css/main.1475b8c2.css",
+    "main.js": "/static/js/main.fdd396ec.js",
+    "static/media/background.png": "/static/media/background.b42d917985ab03d79fd0.png",
+    "static/media/logo.svg": "/static/media/logo.76f8a61851107462866a5d9b933067f7.svg",
+    "static/media/loading.svg": "/static/media/loading.34f12a78b81e8f4e9842cdf50b54edbb.svg",
+    "index.html": "/index.html",
+    "static/media/cross.svg": "/static/media/cross.d02d17bcada4bc7e0663a7ced551e734.svg",
+    "static/media/gray_cross.svg": "/static/media/gray_cross.bfef8d057a531de6c9cf4bfc1591fbfd.svg",
+    "static/media/green_cross.svg": "/static/media/green_cross.669e42f11bb229e014de6c25225ec735.svg",
+    "static/media/red_cross.svg": "/static/media/red_cross.86823617a311aee6112acdd7220ec505.svg",
+    "static/media/hamburger.svg": "/static/media/hamburger.6c519b3234555a5233ab0126f6004a69.svg",
+    "main.1475b8c2.css.map": "/static/css/main.1475b8c2.css.map",
+    "main.fdd396ec.js.map": "/static/js/main.fdd396ec.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1475b8c2.css",
+    "static/js/main.fdd396ec.js"
+  ]
+}

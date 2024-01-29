@@ -1,0 +1,73 @@
+.text-border-black {
+    text-shadow: 2px 0 #000, -2px 0 #000, 0 2px #000, 0 -2px #000,
+    1px 1px #000, -1px -1px #000, 1px -1px #000, -1px 1px #000;
+}
+.text-adjust {
+    font-size: 6vw; 
+
+    @media (min-width: 640px) {
+        font-size: 4vw;
+      }
+    @media (min-width: 1024px) {
+        font-size: 2vw;
+      }
+  }
+
+.scroll::-webkit-scrollbar {
+    width: 8px;
+}
+.scroll:hover {
+    cursor: auto !important
+}
+
+.card-clip {
+    clip-path: url("#card-clip-svg");
+}
+
+.bronze-img {
+    background-color: hwb(30 26% 31%)
+}
+
+.bronze-div {
+    background-color: hsl(30, 66%, 38%)
+}
+
+.bronze-bar {
+    background-color: hwb(30 21% 27%)
+}
+
+.silver-img {
+    background-color: hsl(0, 0%, 75%);
+}
+
+.silver-div {
+    background-color: hsl(0, 0%, 72%);
+}
+
+.silver-bar {
+    background-color: hsl(0, 0%, 78%);
+}
+
+.gold-img {
+    background-color: hwb(50 40% 10%);
+}
+
+.gold-div {
+    background-color: hsl(50, 80%, 50%);
+}
+
+.gold-bar {
+    background-color: hwb(50 29% 15%)
+}
+
+.daimond-img {
+    background-color: hsl(190, 50%, 75%);
+}
+
+.daimond-div {
+    background-color: hsl(190, 47%, 72%);
+}
+
+.daimond-bar {
+    background-color: hsl(190, 53%, 78%);
+}
