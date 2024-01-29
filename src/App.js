@@ -20,7 +20,6 @@ function App() {
   const [auth, setAuth] = useState(false);
 
   useEffect(() => {
-    console.log("AUTH", auth)
   }, [auth]);
 
   const addMessage = (() => {

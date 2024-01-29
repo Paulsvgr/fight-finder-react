@@ -31,10 +31,10 @@ const MatchComponent = ({ Match, onMatchClick, MatchTitle }) => {
             <div className="flex w-full flex-wrap justify-between items-center p-4 bg-white">
               <div className="flex flex-col justify-start items-start">
                 <span className="text-sm lg:text-md font-medium p-2 mb-2 bg-gradient-to-r from-gray-200 to-gray-100 rounded-lg">
-                    {Match.oponent1 ? Match.oponent1 : "Oponent1 undefined"}
+                    {Match.oponent1 ? Match.oponent1.toUpperCase() : "Oponent1 undefined"}
                 </span>
                 <span className="text-sm lg:text-md font-medium p-2 bg-gradient-to-r from-gray-200 to-gray-100 rounded-lg">
-                    {Match.oponent2 ? Match.oponent2 : "Oponent2 undefined"}
+                    {Match.oponent2 ? Match.oponent2.toUpperCase() : "Oponent2 undefined"}
                 </span>
               </div>
               <div className='flex justify-around items-center mt-1'>
