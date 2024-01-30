@@ -1,5 +1,9 @@
-const MatchComponent = ({ Match, onMatchClick, MatchTitle }) => {
+import React, { useState } from 'react';
+import client from '../utils/axiosConfig';
+
+const MatchComponent = ({ Match, onMatchClick, MatchTitle, userUUID }) => {
     const isValidMatch = Match && Match.startframe;
+    const [hasClicked, setHasClicked] = useState(true);
 
     const videoYoutubeId = Match.video.link.match(/[?&]v=([^&]+)/)[1]
 
@@ -7,9 +11,32 @@ const MatchComponent = ({ Match, onMatchClick, MatchTitle }) => {
 
     const vidLink = `https://www.youtube.com/v/${videoYoutubeId}?t=${Match.startframe}s`;
 
+    const recordMatchClick = async (matchId) => {
+      console.log(matchId, userUUID)
+      if (!hasClicked) {
+        try {
+          await client.post('/api/clicks/', {
+            match_id: matchId,
+            source: userUUID,
+          });
+        } catch (error) {
+          console.error('Error recording match click:', error);
+        }
+        setHasClicked(true);
+      }
+    };
+
     const handleClick = () => {
       if (isValidMatch) {
-          window.open(vidLink, '_blank');
+        recordMatchClick(Match.id);
+        window.open(vidLink, '_blank');
+      }
+    };
+
+    const handleSeeMatchClick = () => {
+      if (isValidMatch) {
+        recordMatchClick(Match.id); // Record the click
+        onMatchClick(Match.startframe, videoEmbedLink);
       }
     };
   
@@ -40,7 +67,7 @@ const MatchComponent = ({ Match, onMatchClick, MatchTitle }) => {
               <div className='flex justify-around items-center mt-1'>
                 <button 
                     className='flex items-center justify-center font-medium whitespace-nowrap w-fit mx-2 px-4 py-2 hover:cursor-pointer rounded-lg bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white shadow-md transition duration-300 ease-in-out'
-                    onClick={() => onMatchClick(Match.startframe, videoEmbedLink)}>
+                    onClick={handleSeeMatchClick}>
                         <i className="fas fa-play-circle"></i> See Match
                 </button>
                 <button 

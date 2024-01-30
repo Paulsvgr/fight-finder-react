@@ -8,7 +8,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import VideoPopup from '../components/videoPopup';
 import LeftSvg from '../static/svg/arrow_left.svg';
 
-const SearchEventPage = ({ addMessage }) => {
+const SearchEventPage = ({ addMessage, userUUID }) => {
     const playerRef = useRef(null);
     const [VideoShow, setVideoShow] = useState(false);
     const [Elements, setElements] = useState([]);
@@ -216,7 +216,13 @@ const SearchEventPage = ({ addMessage }) => {
                         </div>
                         <div className="flex flex-wrap justify-center items-center mb-6 w-full">
                         {Elements?.map((Element) => (
-                            <MatchComponent key={Element?.id} Match={Element} onMatchClick={onMatchClick} MatchTitle={Element.video.name} />
+                            <MatchComponent 
+                                key={Element?.id}
+                                Match={Element}
+                                onMatchClick={onMatchClick}
+                                MatchTitle={Element.video.name}
+                                userUUID={userUUID}
+                            />
                         ))}
                         </div>
                     </>

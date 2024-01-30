@@ -9,7 +9,7 @@ import { Link } from 'react-scroll';
 import ContactForm from '../components/forms/ContactForm';
 import VideoPopup from '../components/videoPopup';
 
-const HomePage = ({ addMessage }) => {
+const HomePage = ({ addMessage, userUUID }) => {
     const playerRef = useRef(null);
     const [VideoShow, setVideoShow] = useState(false);
     const [Elements, setElements] = useState([]);
@@ -20,7 +20,10 @@ const HomePage = ({ addMessage }) => {
     const [moreToCome, setMoreToCome] = useState(true);
     const [StartSec, setStartSec]  = useState(0);
     const [loadingShow, setloadingShow] = useState(false);
-    
+    const [matches, setMatches] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [moreMatchesToCome, setMoreMatchesToCome] = useState(true);
+
     const { t } = useTranslation();
     const [videoEmbedLink, setvideoEmbedLink]  = useState(null);
 
@@ -61,6 +64,21 @@ const HomePage = ({ addMessage }) => {
         const filteredNewList = newList.filter(newElement => !uniqueIds.has(newElement[key]));
         return [...existingList, ...filteredNewList];
       }
+
+      useEffect(() => {
+        const fetchMatches = async () => {
+            try {
+                const response = await client.get(`/api/matches/most-clicked?page=${currentPage}&page_size=${3}`);
+                setMoreMatchesToCome(response.data.length === 3)
+                setMatches((prevList) => ListNoDuplicates(prevList, response.data));
+            } catch (error) {
+                console.error('Error fetching matches:', error);
+            }
+        };
+    
+        fetchMatches();
+    }, [currentPage]);
+
 
     const fetchData = useCallback(async () => {
         try {
@@ -136,6 +154,34 @@ const HomePage = ({ addMessage }) => {
                         </Link>
                     </div>
                 </div>
+            </div>
+            <div className='flex flex-col justify-top items-center w-full'>
+                {matches.length > 0 && (
+                    <h2 className="text-white text-center lg:text-4xl text-2xl font-bold mt-8 mb-2">
+                        {t('Most watch matches')}:
+                    </h2>
+                )}
+                {matches.length > 0 && (
+                    <div className='flex w-full flex-wrap justify-center'>
+                        {matches.map(match => (
+                            <MatchComponent 
+                                key={match?.id}
+                                Match={match}
+                                onMatchClick={onMatchClick}
+                                MatchTitle={match.video.name}
+                                userUUID={userUUID}
+                            />
+                        ))}
+                    </div>
+                )}
+                {(moreMatchesToCome && matches.length > 0) && (
+                    <button 
+                        onClick={() => setCurrentPage(prevPage => prevPage + 1)}
+                        className="bg-neutral-100 w-fit rounded-lg mb-2 font-semibold text-black px-4"
+                    >
+                        {t('More')}
+                    </button>
+                )}
             </div>
             <div id='searchEl' className="text-white text-center lg:text-4xl text-2xl font-bold mt-8 mb-2">
                 {t('Search for')}:
@@ -217,7 +263,13 @@ const HomePage = ({ addMessage }) => {
                             </div>
                             <div className="flex flex-wrap justify-center items-center mb-6 w-full">
                             {Elements?.map((Element) => (
-                                <MatchComponent key={Element?.id} Match={Element} onMatchClick={onMatchClick} MatchTitle={Element.video.name} />
+                                <MatchComponent 
+                                    key={Element?.id}
+                                    Match={Element}
+                                    onMatchClick={onMatchClick}
+                                    MatchTitle={Element.video.name}
+                                    userUUID={userUUID}
+                                />
                             ))}
                             </div>
                         </>

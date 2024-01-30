@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import VideoPopup from '../components/videoPopup';
 
-const SearchVideoPage = ({ addMessage, setLoading }) => {
+const SearchVideoPage = ({ addMessage, userUUID }) => {
     const playerRef = useRef(null);
     const [VideoShow, setVideoShow] = useState(false);
     const [Videos, setVideos] = useState([]);
@@ -173,7 +173,7 @@ const SearchVideoPage = ({ addMessage, setLoading }) => {
                     </div>
                     <div className="flex flex-wrap justify-center items-center mb-6 w-full min-h-[50vh]">
                         {Videos?.map((Element) => (
-                            <MatchComponent key={Element?.id} Match={Element} onMatchClick={onMatchClick} MatchTitle={null} />
+                            <MatchComponent key={Element?.id} Match={Element} onMatchClick={onMatchClick} MatchTitle={null} userUUID={userUUID} />
                         ))}
                     </div>
                     {moreToCome && 
