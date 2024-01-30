@@ -7,7 +7,7 @@ const VideoEditModal = ({ video, onSave, onClose }) => {
     const [event_id, setEvent_id] = useState(video.event_id || 1);
     const [textfield, setTextfield] = useState(video.textfield || '');
     const [source, setSource] = useState(video.source || 'ibjjf_u_l');
-    const [analyzed, setAnalyzed] = useState(video.analyzed || false);
+    const [clicks, setClicks] = useState(video.clicks || 0);
     const [percentage, setPercentage] = useState(video.percentage || 0);
     const videoId = video.id || 'new';
     const [events, setEvents] = useState([]);
@@ -35,7 +35,7 @@ const VideoEditModal = ({ video, onSave, onClose }) => {
             link: link,
             source: source,
             textfield: textfield || ' ',
-            analyzed: analyzed,
+            clicks: clicks,
             percentage: percentage,
             event_id: event_id
         };
@@ -101,12 +101,12 @@ const VideoEditModal = ({ video, onSave, onClose }) => {
                                 <div className="w-full mt-4">
                                     <label className="flex items-center">
                                         <input
-                                            type="checkbox"
-                                            checked={analyzed}
-                                            onChange={(e) => setAnalyzed(e.target.checked)}
+                                            type="number"
+                                            checked={clicks}
+                                            onChange={(e) => setClicks(parseInt(e.target.checked))}
                                             className="mr-2"
                                         />
-                                        Analyzed
+                                        Clicks
                                     </label>
                                 </div>
                                 <div className="w-full mt-4">
