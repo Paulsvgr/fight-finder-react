@@ -3,7 +3,7 @@ import client from '../utils/axiosConfig';
 
 const MatchComponent = ({ Match, onMatchClick, MatchTitle, userUUID }) => {
     const isValidMatch = Match && Match.startframe;
-    const [hasClicked, setHasClicked] = useState(true);
+    const [hasClicked, setHasClicked] = useState(false);
 
     const videoYoutubeId = Match.video.link.match(/[?&]v=([^&]+)/)[1]
 
@@ -12,12 +12,11 @@ const MatchComponent = ({ Match, onMatchClick, MatchTitle, userUUID }) => {
     const vidLink = `https://www.youtube.com/v/${videoYoutubeId}?t=${Match.startframe}s`;
 
     const recordMatchClick = async (matchId) => {
-      console.log(matchId, userUUID)
       if (!hasClicked) {
         try {
           await client.post('/api/clicks/', {
             match_id: matchId,
-            source: userUUID,
+            source: String(userUUID),
           });
         } catch (error) {
           console.error('Error recording match click:', error);
