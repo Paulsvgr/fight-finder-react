@@ -22,6 +22,7 @@ const VideoEditModal = ({ video, onSave, onClose }) => {
           );
           setEvents(response.data);
           const sourceResponse = await client.get('/api/sources');
+          console.log("DATAT", sourceResponse);
           setSources(sourceResponse.data);
 
         } catch (error) {
