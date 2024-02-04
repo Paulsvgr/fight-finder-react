@@ -4,7 +4,7 @@ import VideoPage from './VideoPage';
 import ProcessPage from './ProcessPage';
 
 const AdminPage = ({ addMessage }) => {
-  const [activeSection, setActiveSection] = useState('statistics');
+  const [activeSection, setActiveSection] = useState('process');
 
   return (
     <div className="container mx-auto mt-32 flex flex-1 flex-col justify-center items-center">

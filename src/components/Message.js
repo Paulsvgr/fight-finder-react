@@ -7,8 +7,6 @@ function Message({ message }) {
 
   const [text, code, index] = message
 
-  console.log("REPSSONSE HERERE",message)
-
   const [isDismissed, setIsDismissed] = useState(false);
 
   const handleDelete = () => {
