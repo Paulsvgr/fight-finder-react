@@ -29,6 +29,12 @@ const AdminPage = ({ addMessage }) => {
         >
           Process
         </button>
+        <button
+          onClick={() => setActiveSection('source')}
+          className={`${activeSection === 'source'? 'bg-blue-700' : 'bg-blue-500'} hover:cursor-pointer hover:bg-blue-700 text-white font-bold py-1 px-4 rounded`}
+        >
+          Source
+        </button>
       </div>
       {activeSection === 'event' && <EventsPage addMessage={addMessage} />}
       {activeSection === 'video' && <VideoPage addMessage={addMessage} />}
