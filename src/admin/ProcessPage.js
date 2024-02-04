@@ -10,7 +10,6 @@ function ProcessPage({ addMessage }) {
     return processes.sort((a, b) => statusOrder[a.status] - statusOrder[b.status]);
   };
 
-
   const fetchData = useCallback(async () => {
     setLoading(true);
     try {
@@ -47,7 +46,8 @@ function ProcessPage({ addMessage }) {
   const formattedPercentage = process.video_percentage.toFixed(0);
 
   return (
-      <div className="flex justify-between shadow-xl w-full border-b border-gray-200 p-4">
+      <div 
+        className="flex justify-between shadow-xl w-full border-b border-gray-200 p-4">
         <div className='flex w-full justify-between'>
           <h3 className={`text-lg mr-2 font-semibold ${getStatusClass(process.status)}`}>
             {formattedPercentage}% {process.status}

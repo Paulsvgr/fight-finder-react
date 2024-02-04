@@ -4,9 +4,10 @@ import client from '../utils/axiosConfig';
 const VideoEditModal = ({ video, onSave, onClose }) => {
     const [name, setName] = useState(video.name || '');
     const [link, setLink] = useState(video.link || '');
-    const [event_id, setEvent_id] = useState(video.event_id || 1);
+    const [eventId, setEventId] = useState(video.eventId || 1);
     const [textfield, setTextfield] = useState(video.textfield || '');
-    const [source, setSource] = useState(video.source || 'ibjjf_u_l');
+    const [sourceId, setSourceId] = useState([]);
+    const [sources, setSources] = useState([]);
     const [percentage, setPercentage] = useState(video.percentage || 0);
     const videoId = video.id || 'new';
     const [events, setEvents] = useState([]);
@@ -20,6 +21,9 @@ const VideoEditModal = ({ video, onSave, onClose }) => {
             { headers: { 'Content-Type': 'application/json' } }
           );
           setEvents(response.data);
+          const sourceResponse = await client.get('/api/sources');
+          setSources(sourceResponse.data);
+
         } catch (error) {
           console.error('Error fetching Events:', error);
         }
@@ -32,16 +36,16 @@ const VideoEditModal = ({ video, onSave, onClose }) => {
         var videoData = {
             name: name,
             link: link,
-            source: source,
+            source_id: sourceId,
             textfield: textfield || ' ',
             percentage: percentage,
-            event_id: event_id
+            event_id: eventId
         };
         if (videoId === 'new') {
             videoData = {
                 link: link,
-                source: source,
-                event_id: event_id
+                source_id: sourceId,
+                event_id: eventId
             };
         }
         onSave(videoId, videoData);
@@ -74,12 +78,17 @@ const VideoEditModal = ({ video, onSave, onClose }) => {
                             className="w-full p-2 border border-gray-300 rounded mt-2"
                         />
                         <h3 className="w-full">Source</h3>
-                        <input
-                            type="text"
-                            value={source}
-                            onChange={(e) => setSource(e.target.value)}
+                        <select
+                            value={sourceId}
+                            onChange={(e) => setSourceId(e.target.value)}
                             className="w-full p-2 border border-gray-300 rounded mt-2"
-                        />
+                        >
+                            {sources.map(src => (
+                                <option key={src.id} value={src.id}>
+                                    {src.name}
+                                </option>
+                            ))}
+                        </select>
                         {videoId !== 'new' &&
                             <>
                                 <h3 className="w-full">Name</h3>
@@ -110,8 +119,8 @@ const VideoEditModal = ({ video, onSave, onClose }) => {
                         <div className="w-full mt-4">
                             <label>Event</label>
                             <select
-                                value={event_id}
-                                onChange={(e) => setEvent_id(parseInt(e.target.value))}
+                                value={eventId}
+                                onChange={(e) => setEventId(parseInt(e.target.value))}
                                 className="w-full p-2 border border-gray-300 rounded mt-2"
                             >
                                 {events.map(event => (
