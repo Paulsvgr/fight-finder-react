@@ -80,7 +80,7 @@ const VideoEditModal = ({ video, onSave, onClose }) => {
                         <h3 className="w-full">Source</h3>
                         <select
                             value={sourceId}
-                            onChange={(e) => setSourceId(parseFloat(e.target.value))}
+                            onChange={(e) => setSourceId(parseInt(e.target.value))}
                             className="w-full p-2 border border-gray-300 rounded mt-2"
                         >
                             {sources.map(src => (
