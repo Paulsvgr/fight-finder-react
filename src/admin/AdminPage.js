@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import EventsPage from './EventsPage';
 import VideoPage from './VideoPage';
 import ProcessPage from './ProcessPage';
+import SourcePage from './SourcePage';
 
 const AdminPage = ({ addMessage }) => {
   const [activeSection, setActiveSection] = useState('process');
@@ -32,6 +33,7 @@ const AdminPage = ({ addMessage }) => {
       {activeSection === 'event' && <EventsPage addMessage={addMessage} />}
       {activeSection === 'video' && <VideoPage addMessage={addMessage} />}
       {activeSection === 'process' && <ProcessPage addMessage={addMessage} />}
+      {activeSection === 'source' && <SourcePage addMessage={addMessage} />}
     </div>  );
 };
 
