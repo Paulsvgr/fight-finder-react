@@ -4,9 +4,9 @@ import client from '../utils/axiosConfig';
 const VideoEditModal = ({ video, onSave, onClose }) => {
     const [name, setName] = useState(video.name || '');
     const [link, setLink] = useState(video.link || '');
-    const [eventId, setEventId] = useState(video.eventId || 1);
+    const [eventId, setEventId] = useState(video.event_id || 1);
     const [textfield, setTextfield] = useState(video.textfield || '');
-    const [sourceId, setSourceId] = useState([]);
+    const [sourceId, setSourceId] = useState(video.source_id || 2);
     const [sources, setSources] = useState([]);
     const [percentage, setPercentage] = useState(video.percentage || 0);
     const videoId = video.id || 'new';
@@ -22,7 +22,6 @@ const VideoEditModal = ({ video, onSave, onClose }) => {
           );
           setEvents(response.data);
           const sourceResponse = await client.get('/api/sources');
-          console.log("DATAT", sourceResponse);
           setSources(sourceResponse.data);
 
         } catch (error) {
@@ -49,7 +48,6 @@ const VideoEditModal = ({ video, onSave, onClose }) => {
                 event_id: eventId
             };
         }
-        console.log("VIDEO DATA", videoData);
         onSave(videoId, videoData);
     };
 
