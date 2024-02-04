@@ -49,6 +49,7 @@ const VideoEditModal = ({ video, onSave, onClose }) => {
                 event_id: eventId
             };
         }
+        console.log("VIDEO DATA", videoData);
         onSave(videoId, videoData);
     };
 
