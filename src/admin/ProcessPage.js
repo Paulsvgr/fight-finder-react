@@ -6,7 +6,7 @@ function ProcessPage({ addMessage }) {
   const [loading, setLoading] = useState(true);
 
   const sortProcesses = (processes) => {
-    const statusOrder = { 'Unsupported':1, 'Processing': 2, 'Pending': 3, 'Completed': 4 };
+    const statusOrder = { 'Processing': 1, 'Pending': 2, 'Unsupported':3, 'Completed': 4 };
     return processes.sort((a, b) => statusOrder[a.status] - statusOrder[b.status]);
   };
 

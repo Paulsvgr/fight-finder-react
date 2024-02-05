@@ -75,7 +75,7 @@ function EventPage({ addMessage }) {
   
 
   const handleAddEvent = () => {
-    setEditingEvent({ question: '', answer: '' }); // Empty Event for adding a new one
+    setEditingEvent(true); // Empty Event for adding a new one
   };
 
   const Event = ({ event }) => {  

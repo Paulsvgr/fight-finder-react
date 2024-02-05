@@ -1,0 +1,119 @@
+// import React, { useState, useRef } from 'react';
+// import client from '../utils/axiosConfig';
+// import CanvasDraw from 'react-canvas-draw';
+
+// const SourceEditModal = ({ source, onSave, onClose }) => {
+//     const [name, setName] = useState(source.name || '');
+//     const [spots, setSpots] = useState(source.spots || []);
+//     const sourceId = source.id || 'new';
+//     const [videoUrl, setVideoUrl] = useState('');
+//     const [currentFrameTime, setCurrentFrameTime] = useState(0);
+//     const [imageSrc, setImageSrc] = useState('');
+//     const canvasRef = useRef(null);
+
+//     const handleSave = () => {
+//         var sourceData = {
+//             name: name,
+//             spots: spots
+//         };
+//         onSave(sourceId, sourceData);
+//     };
+
+//     const updateSpots = (updatedSpots) => {
+//         setSpots(updatedSpots);
+//     };
+
+    
+//     const fetchNextFrame = async () => {
+//         const nextFrameTime = currentFrameTime + 600; // Increase time by 10 minutes (600 seconds)
+//         setCurrentFrameTime(nextFrameTime);
+
+//         try {
+//             const response = await client.get(`/api/get-frame/`, {
+//                 params: {
+//                     video_url: videoUrl,
+//                     frame_time: nextFrameTime
+//                 },
+//                 responseType: 'blob'
+//             });
+//             const imageObjectURL = URL.createObjectURL(response.data);
+//             setImageSrc(imageObjectURL);
+//         } catch (error) {
+//             console.error('Error fetching frame:', error);
+//         }
+//     };
+
+//     const handleDelete = () => {
+//         if (window.confirm('Are you sure you want to delete this name?')) {
+//           onSave(sourceId, null);
+//         }
+//       };
+
+//     const handleModalClick = (e) => {
+//         // Prsource click inside the modal from closing it
+//         e.stopPropagation();
+//     };
+//     const handleDraw = () => {
+//         const data = canvasRef.current.getSaveData();
+//         // Process the data to extract rectangle coordinates
+//     };
+
+//     return (
+//         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"
+//             onClick={onClose}>
+//             <div className="relative flex justify-center items-center h-full">
+//                 <div className='p-5 border mx-auto shadow-lg rounded-md bg-white'
+//                     onClick={handleModalClick}>
+//                     <h3 className="text-lg font-semibold">{sourceId === 'new' ? 'Add' : 'Edit'} Source</h3>
+//                     <div className='flex flex-wrap'>
+//                         <h3 className="w-full">Name</h3>
+//                         <input
+//                             type="text"
+//                             value={name}
+//                             onChange={(e) => setName(e.target.value)}
+//                             className="w-full p-2 border border-gray-300 rounded mt-2"
+//                         />
+//                         <h3 className="w-full">Spots</h3>
+//                         {spots.map(spot => (
+//                             <div key={spot.id}>
+//                                 {spot.name}
+//                             </div>
+//                         ))}
+//                         <h3 className="w-full">Image and Spots</h3>
+//                         <div>
+//                             <div>
+//                                 <input
+//                                     type="text"
+//                                     value={videoUrl}
+//                                     onChange={(e) => setVideoUrl(e.target.value)}
+//                                     placeholder="Enter YouTube video URL"
+//                                 />
+//                                 <button onClick={fetchNextFrame}>Fetch Next Frame</button>
+//                                 {imageSrc && <img src={imageSrc} alt="Fetched Frame" style={{ maxWidth: '100%' }} />}
+//                                 <div>
+//                                     <CanvasDraw ref={canvasRef} />
+//                                     <button onClick={handleDraw}>Get Drawing Data</button>
+//                                 </div>
+//                             </div>
+//                         </div>
+//                     </div>
+//                     <div className="flex justify-end mt-4">
+//                         <button onClick={handleSave} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">
+//                             {sourceId === 'new' ? 'Add' : 'Save'}
+//                         </button>
+//                         {sourceId !== 'new' &&
+//                             <button onClick={handleDelete} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2">
+//                                 Delete
+//                             </button>
+//                         }
+//                         <button onClick={onClose} className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+//                             Close
+//                         </button>
+//                     </div>
+//                 </div>
+//             </div>
+//         </div>
+//     );
+// };
+
+// export default SourceEditModal;

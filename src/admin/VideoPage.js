@@ -75,7 +75,7 @@ function VideoPage({ addMessage }) {
   
 
   const handleAddVideo = () => {
-    setEditingVideo({ question: '', answer: '' }); // Empty Video for adding a new one
+    setEditingVideo(true); // Empty Video for adding a new one
   };
 
   const Video = ({ video }) => {  
