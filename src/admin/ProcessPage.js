@@ -6,7 +6,7 @@ function ProcessPage({ addMessage }) {
   const [loading, setLoading] = useState(true);
 
   const sortProcesses = (processes) => {
-    const statusOrder = { 'Processing': 1, 'Pending': 2, 'Completed': 3 };
+    const statusOrder = { 'Unsupported':1, 'Processing': 2, 'Pending': 3, 'Completed': 4 };
     return processes.sort((a, b) => statusOrder[a.status] - statusOrder[b.status]);
   };
 
@@ -33,11 +33,13 @@ function ProcessPage({ addMessage }) {
     const getStatusClass = (status) => {
       switch (status) {
         case 'Processing':
-          return 'text-green-500';
+          return 'text-yellow-500';
         case 'Pending':
-          return 'text-yellow-700';
+          return 'text-grey-700';
         case 'Completed':
-          return 'text-grey-600';
+          return 'text-green-600';
+          case 'Unsupported':
+            return 'text-red-600';
         default:
           return '';
       }
