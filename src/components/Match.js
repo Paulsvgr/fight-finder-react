@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import client from '../utils/axiosConfig';
 
 const MatchComponent = ({ Match, onMatchClick, MatchTitle, userUUID }) => {
-    const isValidMatch = Match && Match.startframe;
+    const isValidMatch = Match && (Match.startframe != null);
     const [hasClicked, setHasClicked] = useState(false);
 
     const videoYoutubeId = Match.video.link.match(/[?&]v=([^&]+)/)[1]
