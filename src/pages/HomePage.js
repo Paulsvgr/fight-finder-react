@@ -121,9 +121,11 @@ const HomePage = ({ addMessage, userUUID }) => {
     }, [fetchData, page]);
       
       const handleChoiceChange = (choice) => {
-        setSelectedChoice(choice);
-        setPage(1);
-        setElements([]);
+        if (selectedChoice !== choice) {
+            setSelectedChoice(choice);
+            setPage(1);
+            setElements([]);
+        }
     };
 
     const handleClickMore = () => {
