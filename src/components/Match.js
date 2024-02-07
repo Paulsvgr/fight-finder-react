@@ -54,7 +54,7 @@ const MatchComponent = ({ Match, onMatchClick, MatchTitle, userUUID }) => {
                 <span className="text-lg font-bold bg-gray-400 rounded-md p-1 w-fit">{Match.match_type}</span>
               }
             </div>
-            <div className="flex w-full flex-wrap justify-between items-center p-4 bg-white">
+            <div className="flex w-full flex-wrap justify-between items-center py-4 bg-white">
               <div className="flex flex-col justify-start items-start">
                 <span className="text-sm lg:text-md font-medium p-2 mb-2 bg-gradient-to-r from-gray-200 to-gray-100 rounded-lg">
                     {Match.oponent1 ? Match.oponent1.toUpperCase() : "Oponent1 undefined"}
