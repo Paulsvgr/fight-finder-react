@@ -1,33 +1,76 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import client from '../utils/axiosConfig';
+import ProcessEditModal from './ProcessEditModal';
+
+function ListNoDuplicates(existingList, newList, key = 'id') {
+const existingMap = new Map(existingList.map(element => [element[key], element]));
+  
+const mergedList = newList.map(newElement => {
+  const existingElement = existingMap.get(newElement[key]);
+  if (existingElement) {
+    return { ...existingElement, ...newElement };
+  }
+  return newElement;
+});
+
+return mergedList;
+}
 
 function ProcessPage({ addMessage }) {
   const [processes, setProcesses] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [editingProcess, setEditingProcess] = useState(null);
+  const [refreshKey, setRefreshKey] = useState(0);
+  const [page, setPage] = useState(1);
 
   const sortProcesses = (processes) => {
     const statusOrder = { 'Processing': 1, 'Pending': 2, 'Unsupported':3, 'Completed': 4 };
     return processes.sort((a, b) => statusOrder[a.status] - statusOrder[b.status]);
   };
 
-  const fetchData = useCallback(async () => {
-    setLoading(true);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await client.get(`/api/tasks/?page=${page}`);
+        setProcesses(prevProcesses => sortProcesses(ListNoDuplicates(prevProcesses, response.data)));
+      } catch (error) {
+        console.error('Error fetching Process:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+
+  }, [refreshKey, page]);
+
+  const handleEdit = (process) => {
+    setEditingProcess(process);
+  };
+
+  const handleUpdateProcess = async (processId, about) => {
     try {
-      const response = await client.get(`/api/tasks/`);
-      const sortedData = sortProcesses(response.data);
-      setProcesses(sortedData);
+      // Update or create new Process
+      await client.put(`/api/process/${processId}`, about);
+      addMessage("Process updated successfully", "green");  
     } catch (error) {
-      console.error('Error fetching Processes:', error);
-    } finally {
-      setLoading(false);
+      // Handle errors (e.g., network issues, server errors)
+      console.error('Error:', error);
+      addMessage("An error occurred: " + error.message, "red");
     }
+    setEditingProcess(null); // Close the modal after saving
+    setRefreshKey(oldKey => oldKey + 1);
+    setPage(1)
+  };
+
+  const updateSetrefreshKey = useCallback(() => {
+    setRefreshKey(oldKey => oldKey + 1);
   }, []);
 
   useEffect(() => {
-    fetchData();
-    const interval = setInterval(fetchData, 10000);
+    updateSetrefreshKey();
+    const interval = setInterval(updateSetrefreshKey, 10000);
     return () => clearInterval(interval);
-  }, [fetchData]);
+  }, [updateSetrefreshKey]);
 
   const Process = ({ process }) => {
     const getStatusClass = (status) => {
@@ -38,16 +81,16 @@ function ProcessPage({ addMessage }) {
           return 'text-grey-700';
         case 'Completed':
           return 'text-green-600';
-          case 'Unsupported':
-            return 'text-red-600';
+        case 'Unsupported':
+          return 'text-red-600';
         default:
           return '';
       }
     };
 
-  const formattedPercentage = process.video_percentage.toFixed(0);
+    const formattedPercentage = process.video_percentage.toFixed(0);
 
-  return (
+    return (
       <div 
         className="flex justify-between shadow-xl w-full border-b border-gray-200 p-4">
         <div className='flex w-full justify-between'>
@@ -56,6 +99,14 @@ function ProcessPage({ addMessage }) {
           </h3> 
           <h3 className="text-lg font-semibold"> - {process.video_name}</h3>
           <p className='text-lg ml-4'>{new Date(process.date).toLocaleDateString()}</p>
+        </div>
+        <div className='flex items-center'>
+          <button 
+            onClick={() => handleEdit(process)}
+            className="bg-blue-500 hover:bg-blue-700 text-white h-fit font-bold py-1 px-2 rounded mx-2"
+          >
+            Edit
+          </button>
         </div>
       </div>
     );
@@ -82,6 +133,13 @@ function ProcessPage({ addMessage }) {
           <p>No Processes found.</p>
         )}
       </div>
+      {editingProcess && (
+        <ProcessEditModal
+          process={editingProcess}
+          onSave={handleUpdateProcess}
+          onClose={() => setEditingProcess(null)}
+        />
+      )}
     </div>
   );  
 };
