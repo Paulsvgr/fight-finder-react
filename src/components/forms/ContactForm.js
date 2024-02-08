@@ -42,7 +42,7 @@ function ContactForm({ addMessage, userUUID }) {
             name: name,
             email: email,
             message: message,
-            useruuid: userUUID
+            useruuid: toString(userUUID)
         }
       ).then(function() {
             addMessage(t("Message send successfully!"), "green")
