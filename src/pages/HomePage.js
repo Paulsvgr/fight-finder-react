@@ -157,14 +157,14 @@ const HomePage = ({ addMessage, userUUID }) => {
                     </div>
                 </div>
             </div>
-            <div className='flex flex-col justify-top items-center w-full'>
+            <div className='flex flex-col justify-top items-center w-full mb-20'>
                 {matches.length > 0 && (
                     <h2 className="text-white text-center lg:text-4xl text-2xl font-bold mt-8 mb-2">
                         {t('Most watch matches')}:
                     </h2>
                 )}
                 {matches.length > 0 && (
-                    <div className='flex w-full flex-wrap justify-center'>
+                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 md:p-8 p-4'>
                         {matches.map(match => (
                             <MatchComponent 
                                 key={match?.id}
@@ -177,7 +177,7 @@ const HomePage = ({ addMessage, userUUID }) => {
                     </div>
                 )}
                 {(moreMatchesToCome && matches.length > 0) && (
-                    <button 
+                    <button id='searchEl'
                         onClick={() => setCurrentPage(prevPage => prevPage + 1)}
                         className="bg-neutral-100 w-fit rounded-lg mb-2 font-semibold text-black px-4"
                     >
@@ -185,56 +185,54 @@ const HomePage = ({ addMessage, userUUID }) => {
                     </button>
                 )}
             </div>
-            <div id='searchEl' className="text-white text-center lg:text-4xl text-2xl font-bold mt-8 mb-2">
+            <div  className="text-white text-center lg:text-4xl text-2xl font-bold mt-8 mb-2">
                 {t('Search for')}:
             </div>
             <div className='w-full flex justify-center items-center'>
                 <button
-                    className={`${selectedChoice === 'event' ? 'bg-neutral-500' : 'bg-neutral-800'} border-r-0 rounded-l-lg font-semibold text-white px-2 py-2 lg:text-2xl border-[1px] border-neutral-500 `}
+                    className={`${selectedChoice === 'event' ? 'bg-neutral-500' : 'bg-neutral-800'} rounded-l-lg font-semibold text-white px-4 py-2 lg:px-6 lg:py-3 lg:text-2xl border border-neutral-500 `}
                     onClick={() => handleChoiceChange('event')}
                 >
                     Events
                 </button>
                 <button
-                    className={`${selectedChoice === 'video' ? 'bg-neutral-500' : 'bg-neutral-800'} font-semibold text-white px-2 py-2 lg:text-2xl border-[1px] border-neutral-500 `}
+                    className={`${selectedChoice === 'video' ? 'bg-neutral-500' : 'bg-neutral-800'} font-semibold text-white px-4 py-2 lg:px-6 lg:py-3 lg:text-2xl border-t border-b border-neutral-500 `}
                     onClick={() => handleChoiceChange('video')}
                 >
                     Videos
                 </button>
                 <button
-                    className={`${selectedChoice === 'match' ? 'bg-neutral-500' : 'bg-neutral-800'} border-l-0 rounded-r-lg font-semibold text-white px-2 py-2 lg:text-2xl border-[1px] border-neutral-500 `}
+                    className={`${selectedChoice === 'match' ? 'bg-neutral-500' : 'bg-neutral-800'} rounded-r-lg font-semibold text-white px-4 py-2 lg:px-6 lg:py-3 lg:text-2xl border border-neutral-500 `}
                     onClick={() => handleChoiceChange('match')}
                 >
                     Matches
                 </button>
             </div>
-            <form onSubmit={handleSubmit} className="flex flex-col justify-cneter mt-4 items-center ml-auto mr-auto w-full">
 
-                <div className="p-2 rounded-xl flex flex-wrap justify-start w-fit lg:w-[400px]">
-
-                    <div className="border-solid border bg-white border-black w-full">
+            <form onSubmit={handleSubmit} className="flex flex-col justify-center mt-4 items-center w-full">
+                <div className="p-2 rounded-xl flex justify-center w-full lg:w-auto">
+                    <div className="border border-neutral-700 bg-white w-full md:w-[400px] md:mx-0 mx-[10vw] rounded-lg">
                         <input
-                            className='p-1 w-full'
+                            className='p-2 w-full rounded-lg'
                             type="text"
                             placeholder={t("Enter your search query")}
                             value={query}
                             onChange={(e) => setQuery(e.target.value)}
                         />
                     </div>
-
                 </div>
-
                 <input
-                    className="bg-neutral-200 mb-2 ml-auto mr-auto hover:bg-neutral-600 hover:text-white hover:cursor-pointer rounded-lg w-fit px-2 py-1 mt-1 font-bold"
+                    className="bg-neutral-200 text-neutral-800 hover:bg-neutral-600 hover:text-white cursor-pointer rounded-lg px-6 py-3 mt-4 font-semibold transition duration-300 ease-in-out transform hover:scale-105 shadow-md focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-opacity-50"
                     type="submit"
                     value={t('Search')} />
             </form>
+
             <div className='flex flex-col justify-center items-center'>
                 {ElementsLength > 0 ? (
                     <div className='flex flex-col justify-top items-center w-fit  min-h-[50vh]'>
                         {selectedChoice === 'event' && (
                         <>
-                            <div className="text-white text-center text-2xl font-bold mt-4 mb-10">
+                            <div className="text-white text-center text-2xl font-bold mb-10 mt-20 lg:text-4xl text-2xl">
                             {t('Available Events')}:
                             </div>
                             <div className="flex flex-wrap justify-center items-center mb-6 w-full">
@@ -247,7 +245,7 @@ const HomePage = ({ addMessage, userUUID }) => {
 
                         {selectedChoice === 'video' && (
                         <>
-                            <div className="text-white text-center text-2xl font-bold mt-4 mb-10">
+                            <div className="text-white text-center text-2xl font-bold mb-10 mt-20 lg:text-4xl text-2xl">
                             {t('Available Videos')}:
                             </div>
                             <div className="flex flex-wrap justify-center items-center mb-6 w-full">
@@ -260,10 +258,10 @@ const HomePage = ({ addMessage, userUUID }) => {
 
                         {selectedChoice === 'match' && (
                         <>
-                            <div className="text-white text-center text-2xl font-bold mt-4 mb-10">
+                            <div className="text-white text-center text-2xl font-bold mb-10 mt-20 lg:text-4xl text-2xl">
                             {t('Available Matches')}:
                             </div>
-                            <div className="flex flex-wrap justify-center items-center mb-6 w-full">
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 md:p-8 p-4">
                             {Elements?.map((Element) => (
                                 <MatchComponent 
                                     key={Element?.id}
@@ -292,17 +290,23 @@ const HomePage = ({ addMessage, userUUID }) => {
                 )}
             </div>
             <div className="flex flex-col justify-center items-center lg:mx-10 mt-10 mx-4">
-                <p className="font-semibold text-xl lg:text-3xl text-white text-center mb-4">{t('Fight Finder hjälper dig hitta matcher i långa video.')}</p>
-                <p className="lg:text-xl text-white text-center mb-2">{t('Kontakta gärna oss för.')}</p>
-                <div className='flex flex-wrap items-center justify-center mt-2'>
-                    <span className="font-semibold text-xl lg:text-3xl text-white text-center p-2">{t('Kontakta Fight Finder')}</span>
+                <p className="font-semibold text-xl lg:text-3xl text-white text-center mb-4">
+                    {t('Fight Finder hjälper dig hitta matcher i långa video.')}
+                </p>
+                <p className="lg:text-xl text-white text-center mb-6">
+                    {t('Kontakta gärna oss för.')}
+                </p>
+                <div className="bg-neutral-800 bg-opacity-50 rounded-lg p-4 lg:p-6 shadow-lg">
+                    <h2 className="font-semibold text-xl lg:text-3xl text-white text-center mb-4">
+                        {t('Kontakta Fight Finder')}
+                    </h2>
+                    <ContactForm addMessage={addMessage}/>
                 </div>
-                <ContactForm addMessage={addMessage}/>
             </div>
-        {
-            VideoShow && videoEmbedLink &&
-            <VideoPopup playerRef={playerRef} videoEmbedLink={videoEmbedLink} closeVid={closeVid} loadingShow={loadingShow} />
-        }
+            {
+                VideoShow && videoEmbedLink &&
+                <VideoPopup playerRef={playerRef} videoEmbedLink={videoEmbedLink} closeVid={closeVid} loadingShow={loadingShow} />
+            }
         </div>
     );
 };

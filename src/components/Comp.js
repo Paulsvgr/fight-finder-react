@@ -13,26 +13,25 @@ const CompComponent = ({ Comp, addMessage }) => {
         }
       };
       return (
-        <div
-          key={Comp?.id}
-          className={`w-[90vw] md:w-[50vw] lg:w-[33vw] xl:w-[25vw] p-4 transition-opacity duration-300 ease-in-out ${isValidComp ? 'opacity-100 hover:opacity-90 hover:cursor-pointer' : 'opacity-70'}`}
-          onClick={isValidComp ? handleClick : null}
-        >
-          <div className="w-full bg-white p-4 shadow-xl rounded-md">
-              <div>
-                <p className="text-lg font-bold mb-2">{Comp.name}</p>
-                <p className="text-sm">{t('Date')}: {Comp.date}</p>
-                {isValidComp || 
-                <div className='text-center rounded-xl w-full border-[1px] border-black'
-                style={{
-                    background: Comp.analyzed ? 'white' : `linear-gradient(90deg, white ${Comp.percentage}%,  #a3a3a3 ${Comp.percentage}%)`,
-                }}>
-                    <p className="text">{t('Not analyzed yet')}</p>
-                </div>
-                }
-              </div>
-          </div>
-        </div>
+<div
+  key={Comp?.id}
+  className={`w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 transition-opacity duration-300 ease-in-out ${isValidComp ? 'opacity-100 hover:opacity-90 cursor-pointer' : 'opacity-70'}`}
+  onClick={isValidComp ? handleClick : null}
+>
+  <div className="bg-white p-4 shadow-xl rounded-md">
+    <p className="text-lg font-bold mb-2">{Comp.name}</p>
+    <p className="text-sm mb-4">{t('Date')}: {Comp.date}</p>
+    {!isValidComp && (
+      <div className="text-center p-2 rounded-xl border border-gray-300"
+        style={{
+          backgroundImage: Comp.analyzed ? 'none' : `linear-gradient(to right, #ffffff ${Comp.percentage}%, #a3a3a3 ${Comp.percentage}%)`,
+        }}>
+        <p className="text-gray-600">{t('Not analyzed yet')}</p>
+      </div>
+    )}
+  </div>
+</div>
+
       );
 };
 

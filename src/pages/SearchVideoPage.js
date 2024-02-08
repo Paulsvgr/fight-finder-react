@@ -131,37 +131,31 @@ const SearchVideoPage = ({ addMessage, userUUID }) => {
         <div className="w-full h-[96px] relative">
             <img className="w-full h-full object-cover object-center" src={VideosImg} alt="comps-img" />
         </div>
-        <div className="flex flex-wrap justify-center items-center text-white text-center lg:text-4xl text-2xl font-bold mt-4 mb-2">
-            <img className="bg-white border-gray-600 rounded-md mr-6 text-black font-bold text-lg py-1 pr-1 hover:cursor-pointer"
-                 src={LeftSvg} alt="go-back"
-                 onClick={goBack}
-                />
+        <div className="flex items-center justify-center text-white text-center lg:text-4xl text-2xl font-bold mt-4 px-4 mb-2">
+            <button
+                onClick={goBack}
+                className="flex items-center justify-center bg-neutral-800 hover:bg-neutral-700 text-white font-bold rounded-full p-2 lg:p-3 mr-4 transition-colors duration-300 ease-in-out cursor-pointer">
+                <img src={LeftSvg} alt="go-back" className="w-4 h-4 lg:w-6 lg:h-6" />
+            </button>
             <div className='flex flex-col'>
-                <span className='whitespace-nowrap md:text-4xl text-xl'>{video && video.name}</span>
-                <span className='whitespace-nowrap md:text-4xl text-xl'>{t('Search for')}:</span>
+                <span className='md:text-4xl text-xl'>{video && <h1>{video.name}</h1>}</span>
+                <span className='md:text-4xl text-xl'>{t('Search for')}:</span>
             </div>
-            <span className='bg-black mr-6 text-black font-bold text-lg px-2'>
-                &lt;
-            </span>
         </div>
-        <form onSubmit={handleSubmit} className="flex flex-col justify-cneter mt-4 items-center ml-auto mr-auto w-full">
-
-            <div className="p-2 rounded-xl flex flex-wrap justify-start w-fit">
-
-                <div className="border-solid border bg-white border-black">
+        <form onSubmit={handleSubmit} className="flex flex-col justify-center mt-4 items-center w-full">
+            <div className="p-2 rounded-xl flex justify-center w-full lg:w-auto">
+                <div className="border border-neutral-700 bg-white w-full md:w-[400px] md:mx-0 mx-[10vw] rounded-lg">
                     <input
-                        className='p-1'
+                        className='p-2 w-full rounded-lg'
                         type="text"
                         placeholder={t("Enter your search query")}
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
                     />
                 </div>
-
             </div>
-
             <input
-                className="bg-gray-200 mb-2 ml-auto mr-auto hover:bg-gray-600 hover:text-white hover:cursor-pointer rounded-lg w-fit px-2 py-1 mt-1 font-bold"
+                className="bg-neutral-200 text-neutral-800 hover:bg-neutral-600 hover:text-white cursor-pointer rounded-lg px-6 py-3 mt-4 font-semibold transition duration-300 ease-in-out transform hover:scale-105 shadow-md focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-opacity-50"
                 type="submit"
                 value={t('Search')} />
         </form>
@@ -171,7 +165,7 @@ const SearchVideoPage = ({ addMessage, userUUID }) => {
                     <div className="text-white text-center text-2xl font-bold mt-4 mb-10">
                         {t('Available Matches')}:
                     </div>
-                    <div className="flex flex-wrap justify-center items-center mb-6 w-full min-h-[50vh]">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 md:p-8 p-4 min-h-[50vh]">
                         {Videos?.map((Element) => (
                             <MatchComponent key={Element?.id} Match={Element} onMatchClick={onMatchClick} MatchTitle={null} userUUID={userUUID} />
                         ))}

@@ -40,45 +40,46 @@ const MatchComponent = ({ Match, onMatchClick, MatchTitle, userUUID }) => {
     };
   
     return isValidMatch ? (
-      <div
-        key={Match?.id}
-        className={`w-[90vw] md:w-[50vw] lg:w-[33vw] xl:w-[25vw] p-4 transition-opacity duration-300 ease-in-out ${isValidMatch ? 'opacity-100 transition-all' : 'opacity-50'}`}
-      >
-        <div className="w-full bg-white p-4 border border-gray-300 rounded-md">
-          <div>
-            <div className="flex w-full flex-wrap justify-between">
-              {MatchTitle && 
-                <span className="text-lg font-bold bg-gray-500 rounded-md p-1 w-fit">{MatchTitle}</span>
-              }
-              {Match.match_type && 
-                <span className="text-lg font-bold bg-gray-400 rounded-md p-1 w-fit">{Match.match_type}</span>
-              }
-            </div>
-            <div className="flex w-full flex-wrap justify-between items-center py-4 bg-white">
-              <div className="flex flex-col justify-start items-start">
-                <span className="text-sm lg:text-md font-medium p-2 mb-2 bg-gradient-to-r from-gray-200 to-gray-100 rounded-lg">
-                    {Match.oponent1 ? Match.oponent1.toUpperCase() : "Oponent1 undefined"}
-                </span>
-                <span className="text-sm lg:text-md font-medium p-2 bg-gradient-to-r from-gray-200 to-gray-100 rounded-lg">
-                    {Match.oponent2 ? Match.oponent2.toUpperCase() : "Oponent2 undefined"}
-                </span>
-              </div>
-              <div className='flex justify-around items-center mt-1'>
-                <button 
-                    className='flex items-center justify-center font-medium whitespace-nowrap w-fit mx-2 px-4 py-2 hover:cursor-pointer rounded-lg bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white shadow-md transition duration-300 ease-in-out'
-                    onClick={handleSeeMatchClick}>
-                        <i className="fas fa-play-circle"></i> See Match
-                </button>
-                <button 
-                    className='flex items-center justify-center font-medium w-fit mx-2 px-4 py-2 hover:cursor-pointer rounded-lg bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white shadow-md transition duration-300 ease-in-out'
-                    onClick={handleClick}>
-                        <i className="fab fa-youtube"></i> YouTube
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+<div
+  key={Match?.id}
+  className="max-w-xl mx-auto p-6 bg-white shadow-lg rounded-lg transition-opacity duration-300 ease-in-out hover:shadow-2xl"
+>
+  <div className="space-y-4">
+    {MatchTitle && (
+      <h3 className="text-2xl font-semibold text-center text-gray-900">{MatchTitle}</h3>
+    )}
+    {Match.match_type && (
+      <div className="text-center">
+        <span className="inline-block bg-blue-100 text-blue-800 rounded-full px-4 py-2 text-sm font-semibold shadow">
+          {Match.match_type}
+        </span>
       </div>
+    )}
+    <div className="flex flex-col items-center space-y-2">
+      <span className="block bg-gray-100 rounded-full px-4 py-2 text-sm font-medium text-gray-800 shadow">
+        {Match.oponent1 ? Match.oponent1.toUpperCase() : "Opponent 1 Undefined"}
+      </span>
+      <span className="block bg-gray-100 rounded-full px-4 py-2 text-sm font-medium text-gray-800 shadow">
+        {Match.oponent2 ? Match.oponent2.toUpperCase() : "Opponent 2 Undefined"}
+      </span>
+    </div>
+    <div className="flex justify-center gap-4 mt-4">
+      <button
+        className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded shadow-md transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 flex items-center justify-center"
+        onClick={handleSeeMatchClick}
+      >
+        See Match
+      </button>
+      <button
+        className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-6 rounded shadow-md transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 flex items-center justify-center"
+        onClick={handleClick}
+      >
+        YouTube
+      </button>
+    </div>
+  </div>
+</div>
+
     ) : null;
   };
   

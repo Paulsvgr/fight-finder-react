@@ -85,9 +85,9 @@ const Header = ({ addMessage }) => {
             className="inline-flex items-center fixed top-0 right-0 m-4 ml-auto rounded-lg lg:hidden hamburger"
           >
             {showNav ? (
-              <img className="hover:cursor-pointer hamburger h-[35px]" src={whiteCrossSvg} alt="Close" />
+              <img className="hover:cursor-pointer hamburger h-[35px] shadow-xl bg-black bg-opacity-10 rounded" src={whiteCrossSvg} alt="Close" />
               ) : (
-              <img className="hover:cursor-pointer hamburger h-[35px]" src={hamburgerSvg} alt="Menu" />
+              <img className="hover:cursor-pointer hamburger h-[35px] shadow-xl bg-black bg-opacity-10 rounded" src={hamburgerSvg} alt="Menu" />
             )}
           </button>
           <div className="w-full flex justify-end lg:absolute lg:block lg:ml-[100px] lg:top-3 lg:w-fit">
