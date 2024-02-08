@@ -14,9 +14,20 @@ function ContactForm({ addMessage }) {
   
     const handleChange = (e) => {
       const { name, value } = e.target;
+      let newValue = value;
+
+      // Enforce character limits
+      if (name === 'name' && value.length > 100) {
+        newValue = value.slice(0, 100);
+      } else if (name === 'email' && value.length > 100) {
+        newValue = value.slice(0, 100);
+      } else if (name === 'message' && value.length > 500) {
+        newValue = value.slice(0, 500);
+      }
+
       setFormData({
         ...formData,
-        [name]: value,
+        [name]: newValue,
       });
     };
   
@@ -45,7 +56,7 @@ function ContactForm({ addMessage }) {
     return (
             <form
                 id="contact-form"
-                className="flex flex-col justify-center items-center mx-auto lg:w-1/2 w-full"
+                className="flex flex-col justify-center items-center mx-auto w-full"
                 onSubmit={handleSubmit}
             >
                 <div className="w-full p-2 rounded-xl mb-4">
@@ -59,8 +70,12 @@ function ContactForm({ addMessage }) {
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
+                        maxLength={100}
                         required
                     />
+                    <span className="text-sm text-gray-400">
+                        {formData.name.length}/{100} {t('characters')}
+                    </span>
                 </div>
                 <div className="w-full p-2 rounded-xl mb-4">
                     <label htmlFor="email" className="font-semibold text-white mb-1">
@@ -73,8 +88,12 @@ function ContactForm({ addMessage }) {
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
+                        maxLength={100}
                         required
                     />
+                    <span className="text-sm text-gray-400">
+                        {formData.email.length}/{100} {t('characters')}
+                    </span>
                 </div>
                 <div className="w-full p-2 rounded-xl mb-4">
                     <label htmlFor="message" className="font-semibold text-white mb-1">
@@ -86,8 +105,12 @@ function ContactForm({ addMessage }) {
                         name="message"
                         value={formData.message}
                         onChange={handleChange}
+                        maxLength={500}
                         required
                     />
+                    <span className="text-sm text-gray-400">
+                        {formData.message.length}/{500} {t('characters')}
+                    </span>
                 </div>
                 <button
                     type="submit"
@@ -96,8 +119,7 @@ function ContactForm({ addMessage }) {
                     {t('Send')}
                 </button>
             </form>
-
     );
-  }
-  
-  export default ContactForm;
+}
+
+export default ContactForm;
