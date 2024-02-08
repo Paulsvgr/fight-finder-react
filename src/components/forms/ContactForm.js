@@ -37,7 +37,7 @@ function ContactForm({ addMessage, userUUID }) {
       const { name, email, message } = formData;
 
       client.post(
-        `/${currentLanguage}/api/send-admin-email/`,
+        `/api/send-admin-email/`,
         {
             name: name,
             email: email,
