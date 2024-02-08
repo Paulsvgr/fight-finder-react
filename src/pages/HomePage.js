@@ -300,7 +300,7 @@ const HomePage = ({ addMessage, userUUID }) => {
                     <h2 className="font-semibold text-xl lg:text-3xl text-white text-center mb-4">
                         {t('Kontakta Fight Finder')}
                     </h2>
-                    <ContactForm addMessage={addMessage}/>
+                    <ContactForm addMessage={addMessage} userUUID={userUUID}/>
                 </div>
             </div>
             {

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import client from '../../utils/axiosConfig';
 
-function ContactForm({ addMessage }) {
+function ContactForm({ addMessage, userUUID }) {
     const { t, i18n } = useTranslation();
     const currentLanguage = i18n.language;
 
@@ -42,9 +42,10 @@ function ContactForm({ addMessage }) {
             name: name,
             email: email,
             message: message,
+            useruuid: userUUID
         }
-      ).then(function(res) {
-            addMessage(res.data.msg, res.data.color)
+      ).then(function() {
+            addMessage(t("Message send successfully!"), "green")
      }).catch(function(error) {
             if (error.response) {
                 console.log(error.response)

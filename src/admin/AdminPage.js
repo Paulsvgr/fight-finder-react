@@ -3,6 +3,7 @@ import EventsPage from './EventsPage';
 import VideoPage from './VideoPage';
 import ProcessPage from './ProcessPage';
 import SourcePage from './SourcePage';
+import MessagesPage from './MessagesPage';
 
 const AdminPage = ({ addMessage }) => {
   const [activeSection, setActiveSection] = useState('process');
@@ -35,11 +36,18 @@ const AdminPage = ({ addMessage }) => {
         >
           Source
         </button>
+        <button
+          onClick={() => setActiveSection('message')}
+          className={`${activeSection === 'message'? 'bg-blue-700' : 'bg-blue-500'} hover:cursor-pointer hover:bg-blue-700 text-white font-bold py-1 px-4 rounded`}
+        >
+          Messages
+        </button>
       </div>
       {activeSection === 'event' && <EventsPage addMessage={addMessage} />}
       {activeSection === 'video' && <VideoPage addMessage={addMessage} />}
       {activeSection === 'process' && <ProcessPage addMessage={addMessage} />}
       {activeSection === 'source' && <SourcePage addMessage={addMessage} />}
+      {activeSection === 'message' && <MessagesPage addMessage={addMessage} />}
     </div>  );
 };
 
