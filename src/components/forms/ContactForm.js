@@ -3,8 +3,7 @@ import { useTranslation } from 'react-i18next';
 import client from '../../utils/axiosConfig';
 
 function ContactForm({ addMessage, userUUID }) {
-    const { t, i18n } = useTranslation();
-    const currentLanguage = i18n.language;
+    const { t } = useTranslation();
 
     const [formData, setFormData] = useState({
       email: '',

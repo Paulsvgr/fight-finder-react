@@ -229,7 +229,7 @@ const HomePage = ({ addMessage, userUUID }) => {
 
             <div className='flex flex-col justify-center items-center'>
                 {ElementsLength > 0 ? (
-                    <div className='flex flex-col justify-top items-center w-fit  min-h-[50vh]'>
+                    <div className='flex flex-col justify-top items-center w-fit'>
                         {selectedChoice === 'event' && (
                         <>
                             <div className="text-white text-center text-2xl font-bold mb-10 mt-20 lg:text-4xl text-2xl">
