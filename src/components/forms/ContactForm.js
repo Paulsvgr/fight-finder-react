@@ -106,11 +106,11 @@ function ContactForm({ addMessage, userUUID }) {
                         name="message"
                         value={formData.message}
                         onChange={handleChange}
-                        maxLength={500}
+                        maxLength={250}
                         required
                     />
                     <span className="text-sm text-gray-400">
-                        {formData.message.length}/{500} {t('characters')}
+                        {formData.message.length}/{250} {t('characters')}
                     </span>
                 </div>
                 <button
