@@ -165,7 +165,7 @@ const SearchVideoPage = ({ addMessage, userUUID }) => {
                     <div className="text-white text-center text-2xl font-bold mt-4 mb-10">
                         {t('Available Matches')}:
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 md:p-8 p-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 md:p-8 p-4 items-stretch self-stretch">
                         {Videos?.map((Element) => (
                             <MatchComponent key={Element?.id} Match={Element} onMatchClick={onMatchClick} MatchTitle={null} userUUID={userUUID} />
                         ))}

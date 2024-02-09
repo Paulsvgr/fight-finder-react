@@ -123,8 +123,8 @@ const HomePage = ({ addMessage, userUUID }) => {
       const handleChoiceChange = (choice) => {
         if (selectedChoice !== choice) {
             setSelectedChoice(choice);
-            setPage(1);
             setElements([]);
+            setPage(1);
         }
     };
 
@@ -164,7 +164,7 @@ const HomePage = ({ addMessage, userUUID }) => {
                     </h2>
                 )}
                 {matches.length > 0 && (
-                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 md:p-8 p-4'>
+                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 md:p-8 p-4 items-stretch self-stretch'>
                         {matches.map(match => (
                             <MatchComponent 
                                 key={match?.id}
@@ -261,13 +261,13 @@ const HomePage = ({ addMessage, userUUID }) => {
                             <div className="text-white text-center text-2xl font-bold mb-10 mt-20 lg:text-4xl text-2xl">
                             {t('Available Matches')}:
                             </div>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 md:p-8 p-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 md:p-8 p-4 items-stretch self-stretch">
                             {Elements?.map((Element) => (
                                 <MatchComponent 
                                     key={Element?.id}
                                     Match={Element}
                                     onMatchClick={onMatchClick}
-                                    MatchTitle={Element.video.name}
+                                    MatchTitle={Element.video?.name}
                                     userUUID={userUUID}
                                 />
                             ))}

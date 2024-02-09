@@ -7,7 +7,7 @@ const VideoComponent = ({ Video }) => {
 
   const isValidVideo = Video && Video.percentage > 0;
 
-  const videoYoutubeId = Video.link.match(/[?&]v=([^&]+)/)[1];
+  const videoYoutubeId = Video.link?.match(/[?&]v=([^&]+)/)[1];
 
   const YouTubeThumbnail = `https://img.youtube.com/vi/${videoYoutubeId}/0.jpg`;
 

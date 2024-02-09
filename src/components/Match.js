@@ -5,7 +5,7 @@ const MatchComponent = ({ Match, onMatchClick, MatchTitle, userUUID }) => {
     const isValidMatch = Match && (Match.startframe != null);
     const [hasClicked, setHasClicked] = useState(false);
 
-    const videoYoutubeId = Match.video.link.match(/[?&]v=([^&]+)/)[1]
+    const videoYoutubeId = Match.video?.link.match(/[?&]v=([^&]+)/)[1]
 
     const videoEmbedLink = `https://www.youtube.com/embed/${videoYoutubeId}?enablejsapi=1`
 
@@ -42,7 +42,7 @@ const MatchComponent = ({ Match, onMatchClick, MatchTitle, userUUID }) => {
     return isValidMatch ? (
 <div
   key={Match?.id}
-  className="max-w-xl mx-auto p-6 bg-white shadow-lg rounded-lg transition-opacity duration-300 ease-in-out hover:shadow-2xl"
+  className="max-w-xl mx-auto p-6 bg-white rounded-lg transition-opacity duration-300 ease-in-out"
 >
   <div className="space-y-4">
     {MatchTitle && (
@@ -63,7 +63,7 @@ const MatchComponent = ({ Match, onMatchClick, MatchTitle, userUUID }) => {
         {Match.oponent2 ? Match.oponent2.toUpperCase() : "Opponent 2 Undefined"}
       </span>
     </div>
-    <div className="flex justify-center gap-4 mt-4">
+    <div className="flex justify-center items-end h-full gap-4 mt-4">
       <button
         className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded shadow-md transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 flex items-center justify-center"
         onClick={handleSeeMatchClick}

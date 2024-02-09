@@ -51,7 +51,7 @@ function MessagePage({ addMessage }) {
     setEditingMessage(message);
   };
 
-  const handleUpdateMessage = async (messageId, about) => {
+  const handleSaveMessage = async (messageId, about) => {
     try {
       let response;
       if (about === null) {
@@ -82,16 +82,14 @@ function MessagePage({ addMessage }) {
       return status ? 'text-gray-500' : 'text-green-700';
     };
 
-    const formattedPercentage = message.video_percentage.toFixed(0);
-
     return (
       <div
         className="flex justify-between shadow-xl w-full border-b border-gray-200 p-4">
         <div className='flex w-full justify-between'>
           <h3 className={`text-lg mr-2 font-semibold ${getStatusClass(message.status)}`}>
-            {formattedPercentage}% {message.status}
+            {message.status ? 'seen' : 'new'}
           </h3>
-          <h3 className="text-lg font-semibold"> - {message.video_name}</h3>
+          <h3 className="text-lg font-semibold"> - {message.email}</h3>
           <p className='text-lg ml-4'>{new Date(message.date).toLocaleDateString()}</p>
         </div>
         <div className='flex items-center'>
@@ -130,7 +128,7 @@ function MessagePage({ addMessage }) {
       {editingMessage && (
         <MessageEditModal
           message={editingMessage}
-          onSave={handleUpdateMessage}
+          onSave={handleSaveMessage}
           onClose={() => setEditingMessage(null)}
         />
       )}
